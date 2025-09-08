@@ -8,32 +8,61 @@
 import SwiftUI
 
 struct DetailView: View {
-    var passedValue: String // Don't initialize it - it will be pased from the parent view
+    @State var toDo: String
+    @State private var reminderIsOn = false
+    @State private var dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Date.now)!
+    @State private var notes = ""
+    @State private var isCompleted = false
+    
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        VStack {
-            Image(systemName: "swift")
-                .resizable()
-                .scaledToFit()
-                .foregroundStyle(.orange)
+        List {
+            TextField("Enter To Do here", text: $toDo)
+                .font(.title)
+                .textFieldStyle(.roundedBorder)
+                .listRowSeparator(.hidden)
             
-            Text("You Are a Swifty Legend!\nAnd you passed over the value \(passedValue)")
-                .font(.largeTitle)
-                .multilineTextAlignment(.center)
+            Toggle("Set Reminder:", isOn: $reminderIsOn)
+                .padding(.top)
+                .listRowSeparator(.hidden)
             
-            Spacer()
+            DatePicker("Due Date:", selection: $dueDate)
+                .listRowSeparator(.hidden)
+                .padding(.bottom)
+                .disabled(!reminderIsOn)
             
-            Button("Get Back!") {
-                dismiss()
-            }
-            .buttonStyle(.borderedProminent)
+            Text("Notes:")
+                .padding(.top)
+            
+            TextField("Notes", text: $notes, axis: .vertical)
+                .textFieldStyle(.roundedBorder)
+                .listRowSeparator(.hidden)
+            
+            Toggle("Completed:", isOn: $isCompleted)
+                .padding(.top)
+                .listRowSeparator(.hidden)
         }
-        .padding()
-        //.navigationBarBackButtonHidden()
+        .listStyle(.plain)
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button("Cancel") {
+                    dismiss()
+                }
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("Save") {
+
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    DetailView(passedValue: "Item1")
+    NavigationStack {
+        DetailView(toDo: "")
+    }
+
 }
