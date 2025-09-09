@@ -17,13 +17,49 @@ struct ToDoListView: View {
         NavigationStack {
             List {
                 ForEach(toDos) { toDo in
-                    NavigationLink {
-                        DetailView(toDo: toDo)
-                    } label: {
-                        Text(toDo.item)
+                    HStack {
+                        Image(systemName: toDo.isCompleted ? "checkmark.rectangle" : "rectangle")
+                            .onTapGesture {
+                                toDo.isCompleted.toggle()
+                                // Save after .toggle wasn't working in video so needed these lines.
+                                // Save after .toggle was working for me so don't need these lines.
+                                /*
+                                guard let _ = try? modelContext.save() else {
+                                    print("😡 ERROR: Save after .toggle on ToDoListView did not work.")
+                                    return
+                                }
+                                */
+                            }
+                        NavigationLink {
+                            DetailView(toDo: toDo)
+                        } label: {
+                            Text(toDo.item)
+                        }
+                        .swipeActions {
+                            Button("Delete", role: .destructive) {
+                                modelContext.delete(toDo)
+                                // Delete wasn't working in video so needed these lines.
+                                // Delete was working for me so don't need these lines.
+                                /*
+                                guard let _ = try? modelContext.save() else {
+                                    print("😡 ERROR: Save after .delete on ToDoListView did not work.")
+                                    return
+                                }
+                                */
+                            }
+                        }
                     }
                     .font(.title2)
                 }
+                /* Alternative to .swipeActions
+                .onDelete { indexSet in
+                    indexSet.forEach({modelContext.delete(toDos[$0])})
+                    guard let _ = try? modelContext.save() else {
+                        print("😡 ERROR: Save after .delete on ToDoListView did not work.")
+                        return
+                    }
+                }
+                */
             }
             .navigationTitle("To Do List")
             .navigationBarTitleDisplayMode(.automatic)
