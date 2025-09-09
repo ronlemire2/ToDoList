@@ -37,6 +37,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		883E59752E70EB8A00FE8166 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				88B3153F2E6B817C000874F8 /* ToDoListView.swift */,
+				88B3154B2E6B83FE000874F8 /* DetailView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		883E59762E70EBB000FE8166 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				884712C12E70913600A57AB9 /* ToDo.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		88B315312E6B817C000874F8 = {
 			isa = PBXGroup;
 			children = (
@@ -58,9 +75,8 @@
 			children = (
 				883E59742E70D52F00FE8166 /* Info.plist */,
 				88B3153D2E6B817C000874F8 /* ToDoListApp.swift */,
-				88B3153F2E6B817C000874F8 /* ToDoListView.swift */,
-				88B3154B2E6B83FE000874F8 /* DetailView.swift */,
-				884712C12E70913600A57AB9 /* ToDo.swift */,
+				883E59762E70EBB000FE8166 /* Models */,
+				883E59752E70EB8A00FE8166 /* Views */,
 				88B315412E6B817E000874F8 /* Assets.xcassets */,
 				88B315432E6B817E000874F8 /* Preview Content */,
 			);
