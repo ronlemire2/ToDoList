@@ -84,7 +84,8 @@ struct DetailView: View {
 
 #Preview {
     /*
-     From: copilot.microsoft.com - Missing or Improper .modelContainer Setup in Preview
+     Preview Error: "SwiftUI cannot preview in this file" combined with a fatal crash.
+     Fix from: copilot.microsoft.com - Missing or Improper .modelContainer Setup in Preview.
      SwiftUI previews don’t automatically initialize ModelContainer. If your view relies on @Environment(\.modelContext) or @Query, you must provide a mock container in the preview.
      */
     let modelContainer = try! ModelContainer(for: ToDo.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
