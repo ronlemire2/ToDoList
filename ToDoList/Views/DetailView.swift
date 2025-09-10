@@ -83,9 +83,11 @@ struct DetailView: View {
 }
 
 #Preview {
-    NavigationStack {
-        DetailView(toDo: ToDo())
-            .modelContainer(for: ToDo.self, inMemory: true)
-    }
-
+    /*
+     From: copilot.microsoft.com - Missing or Improper .modelContainer Setup in Preview
+     SwiftUI previews don’t automatically initialize ModelContainer. If your view relies on @Environment(\.modelContext) or @Query, you must provide a mock container in the preview.
+     */
+    let modelContainer = try! ModelContainer(for: ToDo.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    return DetailView(toDo: ToDo())
+        .modelContainer(modelContainer)
 }
